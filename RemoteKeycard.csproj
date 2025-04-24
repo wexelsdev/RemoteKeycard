@@ -18,7 +18,7 @@
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
         <DebugSymbols>true</DebugSymbols>
-        <DebugType>full</DebugType>
+        <DebugType>embedded</DebugType>
         <Optimize>false</Optimize>
         <OutputPath>bin\Debug\</OutputPath>
         <DefineConstants>DEBUG;TRACE</DefineConstants>
@@ -27,36 +27,38 @@
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
         <PlatformTarget>AnyCPU</PlatformTarget>
-        <DebugType>pdbonly</DebugType>
+        <DebugType>embedded</DebugType>
         <Optimize>true</Optimize>
         <OutputPath>bin\Release\</OutputPath>
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x64' ">
+      <OutputPath>bin\x64\Debug\</OutputPath>
+      <PlatformTarget>x64</PlatformTarget>
+      <DebugType>embedded</DebugType>
+    </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x64' ">
+      <OutputPath>bin\x64\Release\</OutputPath>
+      <PlatformTarget>x64</PlatformTarget>
+      <Optimize>true</Optimize>
+      <DebugType>embedded</DebugType>
+    </PropertyGroup>
     <ItemGroup>
-        <Reference Include="0Harmony">
-          <HintPath>..\..\sl_libs\0Harmony.dll</HintPath>
-        </Reference>
-        <Reference Include="Assembly-CSharp">
-          <HintPath>..\..\sl_libs\Assembly-CSharp-Publicized.dll</HintPath>
-        </Reference>
-        <Reference Include="Exiled.API">
-          <HintPath>..\..\sl_libs\Exiled.API.dll</HintPath>
-        </Reference>
-        <Reference Include="Exiled.Events">
-          <HintPath>..\..\sl_libs\Exiled.Events.dll</HintPath>
-        </Reference>
-        <Reference Include="Mirror">
-          <HintPath>..\..\sl_libs\Mirror.dll</HintPath>
-        </Reference>
+        <Reference Include="0Harmony" HintPath="..\..\sl_libs\0Harmony.dll" />
+        <Reference Include="Assembly-CSharp" HintPath="..\..\sl_libs\Assembly-CSharp-Publicized.dll" />
+        <Reference Include="CommandSystem.Core" HintPath="..\..\sl_libs\CommandSystem.Core.dll" />
+        <Reference Include="Exiled.API" HintPath="..\..\sl_libs\Exiled.API.dll" />
+        <Reference Include="Exiled.Events" HintPath="..\..\sl_libs\Exiled.Events.dll" />
+        <Reference Include="Mirror" HintPath="..\..\sl_libs\Mirror.dll" />
+        <Reference Include="PluginAPI" HintPath="..\..\sl_libs\PluginAPI.dll" />
         <Reference Include="System"/>
         <Reference Include="System.Core"/>
         <Reference Include="System.Data"/>
         <Reference Include="System.Xml"/>
-        <Reference Include="UnityEngine.CoreModule">
-          <HintPath>..\..\sl_libs\UnityEngine.CoreModule.dll</HintPath>
-        </Reference>
+        <Reference Include="UnityEngine.CoreModule" HintPath="..\..\sl_libs\UnityEngine.CoreModule.dll" />
+        <Reference Include="UnityEngine.PhysicsModule" HintPath="..\..\sl_libs\UnityEngine.PhysicsModule.dll" />
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Config.cs" />
