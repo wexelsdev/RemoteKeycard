@@ -28,7 +28,7 @@ namespace RemoteKeycard
 
         public override void OnDisabled()
         {
-            Player.InteractingDoor -= _handlers.OnInteractingDoor;
+            Player.InteractingDoor -= _handlers!.OnInteractingDoor;
             Player.InteractingLocker -= _handlers.OnInteractingLocker;
             Player.UnlockingGenerator -= _handlers!.OnUnlockingGenerator;
             
