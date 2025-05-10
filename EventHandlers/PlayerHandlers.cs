@@ -1,9 +1,6 @@
-using System;
-using System.Linq;
-using System.Reflection;
-using Exiled.API.Features.Items;
+using Exiled.API.Enums;
 using Exiled.Events.EventArgs.Player;
-using MapGeneration.Distributors;
+using RemoteKeycard.API;
 
 namespace RemoteKeycard.EventHandlers
 {
@@ -11,22 +8,35 @@ namespace RemoteKeycard.EventHandlers
     {
         internal void OnUnlockingGenerator(UnlockingGeneratorEventArgs ev)
         {
-            foreach (Item? keycardItem in ev.Player.Items.Where(x => x.IsKeycard))
+            if (ev.IsAllowed || ev.Generator.IsUnlocked)
+                return;
+
+            ev.IsAllowed = ev.Player.IsPermitted(ev.Generator.KeycardPermissions);
+        }
+
+        internal void OnInteractingDoor(InteractingDoorEventArgs ev)
+        {
+            if (ev.Player.IsBypassModeEnabled || ev.IsAllowed || ev.Door.IsLocked || ev.Door.KeycardPermissions == KeycardPermissions.None)
+                return;
+        
+            if (ev.Player.IsPermitted(ev.Door.KeycardPermissions))
             {
-                if (keycardItem is Keycard keycard && keycard.Permissions >= ev.Generator.KeycardPermissions)
-                {
-                    Type type = ev.Generator.Base.GetType();
-                    MethodInfo? method = type.GetMethod("ServerSetFlag", BindingFlags.NonPublic | BindingFlags.Instance);
-
-                    if (method == null) return;
-                    
-                    ev.IsAllowed = false;
+                ev.IsAllowed = true;
+                ev.CanInteract = true;
             
-                    method.Invoke(ev.Generator.Base, new object[] { Scp079Generator.GeneratorFlags.Unlocked, true });
-
-                    return;
-                }
+                return;
             }
+
+            ev.IsAllowed = false;
+            ev.CanInteract = true;
+        }
+
+        internal void OnInteractingLocker(InteractingLockerEventArgs ev)
+        {
+            if (ev.Player.IsBypassModeEnabled || ev.IsAllowed || !ev.InteractingChamber.CanInteract)
+                return;
+
+            ev.IsAllowed = ev.Player.IsPermitted(ev.InteractingChamber.RequiredPermissions);
         }
     }
 }

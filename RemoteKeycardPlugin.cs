@@ -1,6 +1,5 @@
 using System;
 using Exiled.Events.Handlers;
-using HarmonyLib;
 using RemoteKeycard.EventHandlers;
 
 namespace RemoteKeycard
@@ -11,32 +10,29 @@ namespace RemoteKeycard
         public override string Prefix => "remote_keycard";
         public override string Author => "wexelsdev";
         
-        public override Version Version => new(1, 0, 0);
-        public override Version RequiredExiledVersion => new(9, 5, 0);
+        public override Version Version => new(1, 1, 0);
+        public override Version RequiredExiledVersion => new(9, 6, 0);
         
-        private Harmony? _harmony;
         private PlayerHandlers? _handlers;
         
         public override void OnEnabled()
         {
-            _harmony = new($"remotekeycard.wexelsdev.{DateTime.Now.Ticks}");
             _handlers = new();
-
-            _harmony.PatchAll();
             
             Player.UnlockingGenerator += _handlers.OnUnlockingGenerator;
+            Player.InteractingLocker += _handlers.OnInteractingLocker;
+            Player.InteractingDoor += _handlers.OnInteractingDoor;
             
             base.OnEnabled();
         }
 
         public override void OnDisabled()
         {
+            Player.InteractingDoor -= _handlers.OnInteractingDoor;
+            Player.InteractingLocker -= _handlers.OnInteractingLocker;
             Player.UnlockingGenerator -= _handlers!.OnUnlockingGenerator;
             
-            _harmony!.UnpatchAll();
-            
             _handlers = null;
-            _harmony = null;
             
             base.OnDisabled();
         }
