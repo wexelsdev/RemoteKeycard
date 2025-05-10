@@ -18,7 +18,7 @@ RemoteKeycard is an EXILED plugin for SCP: Secret Laboratory that enhances gamep
 
 ## Requirements
 - **SCP: Secret Laboratory**: Latest version.
-- **EXILED Framework**: Version 9.5.0 or higher.
+- **EXILED Framework**: Version 9.5.X (v1.0.0) or higher (v1.1.0).
 
 ## Contributing
 Contributions are welcome! To contribute:
