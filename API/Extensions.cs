@@ -8,8 +8,8 @@ namespace RemoteKeycard.API
 {
     public static class Extensions
     {
-        public static bool IsPermitted(this Player player, KeycardPermissions neededPermissions) => player.GetKeycards()
-            .Any(x => (x.Permissions & neededPermissions) == neededPermissions);
+        public static bool IsPermitted(this Player player, KeycardPermissions neededPermissions) => GetKeycards(player)
+            .Any(x => (neededPermissions & x.Permissions) != 0);
     
         public static List<Keycard> GetKeycards(this Player player) =>
             player.Items.OfType<Keycard>().ToList();

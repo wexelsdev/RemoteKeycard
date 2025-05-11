@@ -10,7 +10,7 @@ namespace RemoteKeycard
         public override string Prefix => "remote_keycard";
         public override string Author => "wexelsdev";
         
-        public override Version Version => new(1, 1, 0);
+        public override Version Version => new(1, 1, 1);
         public override Version RequiredExiledVersion => new(9, 6, 0);
         
         private PlayerHandlers? _handlers;
