@@ -3,8 +3,8 @@
 RemoteKeycard is an EXILED plugin for SCP: Secret Laboratory that enhances gameplay by allowing players to interact with keycard-protected objects (doors, lockers, and generators) without needing to hold the keycard in their hand. As long as the required keycard is in the player's inventory, interactions are seamless, improving convenience and immersion.
 
 ## Attention!
-**🚚 Project has moved!**
-- This repository is no longer maintained. The latest version of the project is now available on GitLab:
+### 🚚 Project has moved!
+This repository is no longer maintained. The latest version of the project is now available on GitLab:
 👉 [Click!](https://gitlab.com/nu-forward/hazbin/RemoteKeycard)
 
 ## Features
